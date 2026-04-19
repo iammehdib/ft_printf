@@ -47,7 +47,7 @@ void	print_hexadecimal(int number, int is_uppercase, size_t *str_lenght)
 		str = "123456789ABCDEF";
 	else
 		str = "123456789abcdef";
-	if (n_long >= 10)
-		print_number(n_long / 10, str_lenght);
+	if (n_long >= 16)
+		print_number(n_long / 16, str_lenght);
 	print_char(str[n_long % 16], str_lenght);
 }
