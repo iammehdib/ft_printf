@@ -6,7 +6,7 @@
 /*   By: mbuchet <mbuchet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:28:10 by mbuchet           #+#    #+#             */
-/*   Updated: 2026/04/20 17:16:46 by mbuchet          ###   ########.fr       */
+/*   Updated: 2026/04/20 18:58:39 by mbuchet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	find_type_pourcentage(va_list args, char c, size_t *str_lenght)
 	else if (c == 'u')
 		print_number_unsigned(va_arg(args, unsigned int), str_lenght);
 	else if (c == 'x')
-		print_hexadecimal(va_arg(args, int), 0, str_lenght);
+		print_hexadecimal(va_arg(args, unsigned int), 0, str_lenght);
 	else if (c == 'X')
-		print_hexadecimal(va_arg(args, int), 1, str_lenght);
+		print_hexadecimal(va_arg(args, unsigned int), 1, str_lenght);
 	else if (c == 'p')
 		print_pointer(va_arg(args, intptr_t), str_lenght);
 	else if (c == '%')
@@ -60,5 +60,7 @@ int	ft_printf(const char *s, ...)
 {
 	ft_printf("\nprint len; %d\n", ft_printf("Coucou %s", "Mehdi "));
 	ft_printf("%s\n", (char *) NULL);
-	ft_printf(" %c %c %c ", '2', '1', 0);
+	ft_printf(" %c %c %c \n", '2', '1', 0);
+	ft_printf(" %p \n", -1);
+	ft_printf(" %x ", 0);
 }*/
