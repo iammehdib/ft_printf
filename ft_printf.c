@@ -6,7 +6,7 @@
 /*   By: mbuchet <mbuchet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:28:10 by mbuchet           #+#    #+#             */
-/*   Updated: 2026/04/20 18:58:39 by mbuchet          ###   ########.fr       */
+/*   Updated: 2026/04/20 19:07:09 by mbuchet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	find_type_pourcentage(va_list args, char c, size_t *str_lenght)
 	else if (c == 'p')
 		print_pointer(va_arg(args, intptr_t), str_lenght);
 	else if (c == '%')
-		write(1, &"%%", 2);
+		print_string("%", str_lenght);
 	return (number_of_writing_char);
 }
 
@@ -56,11 +56,19 @@ int	ft_printf(const char *s, ...)
 	return (str_lenght);
 }
 
-/*int	main(void)
+/*#include <stdio.h>
+
+int	main(void)
 {
 	ft_printf("\nprint len; %d\n", ft_printf("Coucou %s", "Mehdi "));
 	ft_printf("%s\n", (char *) NULL);
 	ft_printf(" %c %c %c \n", '2', '1', 0);
 	ft_printf(" %p \n", -1);
-	ft_printf(" %x ", 0);
+	ft_printf(" %x \n", 0);
+
+
+	ft_printf("1: %% \n");
+	ft_printf("2: %%%% \n");
+	printf("1: %% \n");
+	printf("2: %%%% \n");
 }*/
