@@ -6,7 +6,7 @@
 /*   By: mbuchet <mbuchet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 15:28:26 by mbuchet           #+#    #+#             */
-/*   Updated: 2026/04/19 19:11:43 by mbuchet          ###   ########.fr       */
+/*   Updated: 2026/04/20 17:13:35 by mbuchet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ void	print_string(char *str, size_t *str_lenght)
 
 void	print_char(char c, size_t *str_lenght)
 {
-	if (c == 0)
-	{
-		print_string("(null)", str_lenght);
-		return ;
-	}
 	write(1, &c, 1);
 	*str_lenght += 1;
 }
