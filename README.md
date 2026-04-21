@@ -2,7 +2,7 @@ _This project has been created as part of the 42 curriculum by mbuchet._
 
 # Description
 
-ft_printf est une function extremement importante pour print des résultats avec des arguments custom facilement, il se base sur la function [printf du language C](https://man7.org/linux/man-pages/man3/printf.3.html)
+ft_printf est une fonction extremement importante pour print des résultats avec des arguments custom facilement, il se base sur la fonction [printf du language C](https://man7.org/linux/man-pages/man3/printf.3.html)
 
 # Instructions
 
@@ -12,15 +12,13 @@ Tester et compiler sur un environnement Ubuntu.
 
 # Resources
 
-ft_printf: La function permettant de pouvoir print dans la console un texte contenant des arguments (par exemple %s pour les strings, %d pour les int).
-print_digits: des functions utilitaires pour gérer tout ce qui touche aux nombres (nombre signé, nombre unsigné et hexadecimal).
-print_pointer: une function utilitaire pour print un pointeur d'une variable.
-print_str: des functions utilitaires pour gérer tout ce qui touche aux strings (un caractère et une chaine de caractères).
+ft_printf: La fonction permettant de pouvoir print dans la console un texte contenant des arguments (par exemple %s pour les strings, %d pour les int).
+print_digits: des fonctions utilitaires pour gérer tout ce qui touche aux nombres (nombre signé, nombre unsigné et hexadecimal).
+print_pointer: une fonction utilitaire pour print un pointeur d'une variable.
+print_str: des fonctions utilitaires pour gérer tout ce qui touche aux strings (un caractère et une chaine de caractères).
 
-## Algorithme et structure de données
-
-### Structure du projet
-A faire
+## Structure du projet
+Une reproduction simpliste du printf de C, le fichier principale comprend 2 fonctions simples dans le projet, `ft_printf` et `handle_specifier`, printf accepte les paramètres et je boucle sur le string et je regarde ensuite si le caractère à l'index actuelle est un pourcentage et ensuite si le prochain caractère existe, si c'est le cas je rentre dans la nouvelle fonction nommée handle_specifier qui trie les différents flag et permet de traiter chaque flag différemment, chacune des fonctions call dans la fonction handle_specifier sont séparées sur plusieurs fichiers pour mieux organiser le projet si besoin plus tard de faire des ajouts de flag, les fonctions sont inspirées de la Libft mais refais pour le projet pour s'adapter au besoin, toutes les fonctions externes du fichier principale comprennent un pointeur `size_t` de `str_length` c'est la variable qui doit etre modifier à chaque écrite dans la console pour comptabiliser le nombre de caractères au total à la toute fin de la fonction.
 
 ## Références
 - Sujet du PDF, version 12.1, ft_printf de 42 Bruxelles.
