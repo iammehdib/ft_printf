@@ -6,7 +6,7 @@
 /*   By: mbuchet <mbuchet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:28:10 by mbuchet           #+#    #+#             */
-/*   Updated: 2026/04/20 20:31:08 by mbuchet          ###   ########.fr       */
+/*   Updated: 2026/04/21 18:56:47 by mbuchet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,3 @@ int	ft_printf(const char *s, ...)
 	va_end(args);
 	return (str_lenght);
 }
-
-/*#include <stdio.h>
-
-int	main(void)
-{
-	ft_printf("\nprint len; %d\n", ft_printf("Coucou %s", "Mehdi "));
-	ft_printf("%s\n", (char *) NULL);
-	ft_printf(" %c %c %c \n", '2', '1', 0);
-	ft_printf(" %p \n", -1);
-	ft_printf(" %x \n", 0);
-
-
-	ft_printf("1:jdhsjhds%z %%% \n");
-	ft_printf("2: %%%% \n");
-	printf("1:jdhsjhds%z %%% \n");
-	printf("2: %%%% \n");
-}*/
