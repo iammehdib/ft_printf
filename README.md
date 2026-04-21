@@ -1,29 +1,83 @@
 _This project has been created as part of the 42 curriculum by mbuchet._
 
-# Description
+## Description
+**ft_printf** is a simplified reimplementation of the C function **printf**.  
+Its goal is to better understand:
+- format string parsing,
+- variadic arguments (`stdarg.h`),
+- formatted output in C.
 
-ft_printf est une fonction extremement importante pour print des résultats avec des arguments custom facilement, il se base sur la fonction [printf du language C](https://man7.org/linux/man-pages/man3/printf.3.html)
+Reference:
+- https://man7.org/linux/man-pages/man3/printf.3.html
 
-# Instructions
+## Instructions
 
-Pour compiler le projet il suffit d'éxecuter `make` dans la console dans le dossier root et le fichier attendu nommé `libftprintf.a` sera créée.
-Avant chaque nouvelle compilation, n'oubliez pas d'exécuter `make fclean` pour supprimer les fichiers indésirables de l'ancienne compilation.
-Tester et compiler sur un environnement Ubuntu.
+### Build
+From the root of the repository, run:
+- `make`
 
-# Resources
+This generates:
+- `libftprintf.a`
 
-ft_printf: La fonction permettant de pouvoir print dans la console un texte contenant des arguments (par exemple %s pour les strings, %d pour les int).
-print_digits: des fonctions utilitaires pour gérer tout ce qui touche aux nombres (nombre signé, nombre unsigné et hexadecimal).
-print_pointer: une fonction utilitaire pour print un pointeur d'une variable.
-print_str: des fonctions utilitaires pour gérer tout ce qui touche aux strings (un caractère et une chaine de caractères).
+### Clean / Rebuild
+- `make fclean` (remove generated files)
+- `make re` (rebuild from scratch)
 
-## Structure du projet
-Une reproduction simpliste du printf de C, le fichier principale comprend 2 fonctions simples dans le projet, `ft_printf` et `handle_specifier`, printf accepte les paramètres et je boucle sur le string et je regarde ensuite si le caractère à l'index actuelle est un pourcentage et ensuite si le prochain caractère existe, si c'est le cas je rentre dans la nouvelle fonction nommée handle_specifier qui trie les différents flag et permet de traiter chaque flag différemment, chacune des fonctions call dans la fonction handle_specifier sont séparées sur plusieurs fichiers pour mieux organiser le projet si besoin plus tard de faire des ajouts de flag, les fonctions sont inspirées de la Libft mais refais pour le projet pour s'adapter au besoin, toutes les fonctions externes du fichier principale comprennent un pointeur `size_t` de `str_length` c'est la variable qui doit etre modifier à chaque écrite dans la console pour comptabiliser le nombre de caractères au total à la toute fin de la fonction.
+Tested on **Ubuntu** (42 Brussels environment).
 
-## Références
-- Sujet du PDF, version 12.1, ft_printf de 42 Bruxelles.
-- 2/3 anciennes bases de code de ma Libft.
-- Explication de l'utilisation de [uintptr_t](https://stackoverflow.com/questions/1845482/what-is-the-uintptr-t-data-type)
+## Algorithm and data structure (explanation + justification)
 
-## Utulisation de l'IA
-Usage de l'IA vers la toute fin comme "professeur" pour régler quelques problèmes connes de ma part pour l'hexadecimal, en demandant toujours de ne jamais donner de code et de résolution mais avec des explications/indices pour m'y guider, les prompts sont généralement sur les modèles free de GPT Copilot Pro.
+### Algorithm (parsing / dispatch)
+The format string is processed in a **single pass** from left to right:
+- regular characters are printed as-is,
+- when a `%` is encountered (and the next character exists), the next character is treated as a specifier and handled by a dispatcher.
+
+**Why this approach?**
+- It is simple, efficient (linear complexity), and easy to debug.
+- It makes it easy to extend the project by adding new specifiers in one place (the dispatcher).
+
+### Data structures
+This project does not rely on complex data structures.
+The implementation mainly uses:
+- an index to iterate through the format string,
+- a `va_list` to access variadic arguments,
+- a `size_t` counter (`size_t *str_length`) shared across helper functions to track the number of printed characters.
+
+**Why `size_t *str_length`?**
+- It matches the purpose of counting bytes/characters printed.
+- Passing it by pointer allows every helper to update the total without additional return values, keeping function responsibilities clear.
+
+## How it works (overview)
+
+### Supported specifiers (dispatch + internal functions)
+Based on `handle_specifier`, these specifiers are handled:
+
+- `%c` → `print_char(int c, size_t *str_length)`
+- `%s` → `print_string(char *str, size_t *str_length)`
+- `%d` / `%i` → `print_number(int number, size_t *str_length)`
+- `%u` → `print_number_unsigned(unsigned int number, size_t *str_length)`
+- `%x` → `print_hexadecimal(unsigned int number, int is_upper, size_t *str_length)` with `is_upper = 0`
+- `%X` → `print_hexadecimal(unsigned int number, int is_upper, size_t *str_length)` with `is_upper = 1`
+- `%p` → `print_pointer(uintptr_t pointer, size_t *str_length)`
+- any other character after `%` → prints a literal `%` using `print_char('%', str_length)`
+
+### Helper files (short summary)
+- `print_digits`: integer / unsigned / hexadecimal helpers
+- `print_pointer`: pointer printing helper
+- `print_str`: character and string helpers
+
+### Counting printed characters
+Most helper functions receive a `size_t *str_length` pointer to keep track of how many characters were written, so `ft_printf` can return the total (like the real `printf`).
+
+## Resources (references + AI usage)
+
+### References
+- 42 subject PDF (ft_printf, version 12.1, 42 Brussels)
+- `printf(3)` manual: https://man7.org/linux/man-pages/man3/printf.3.html
+- `uintptr_t` explanation: https://stackoverflow.com/questions/1845482/what-is-the-uintptr-t-data-type
+- Parts of my old Libft codebase (as references)
+
+### AI usage
+AI was used only for debugging help, specifically on the **hexadecimal printing** part of the project (e.g. edge cases and letter casing for `%x`/`%X`).  
+I requested explanations and hints **without requesting code**, and then implemented the fixes myself.
+This README was translated from French to English.
